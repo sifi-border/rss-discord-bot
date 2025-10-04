@@ -47,3 +47,30 @@ main.rsを編集
 
 ### 15:30- rss取得
 
+RSSの取得を試みる
+
+feedのparser crateがあるのでありがたく拝借するあるのでありがたく用いる。
+
+```
+Feed Title: This Week in Rust
+Number of Entries: 4
+Title: This Week in Rust 619
+Link: https://this-week-in-rust.org/blog/2025/10/01/this-week-in-rust-619/
+Summary: <p>Hello and welcome to another issue of <em>This Week in Rust</em>!
+<a href="https://www.rust-lang.org/">Rust</a> is a programming langu...
+---
+Title: This Week in Rust 618
+Link: https://this-week-in-rust.org/blog/2025/09/24/this-week-in-rust-618/
+Summary: <p>Hello and welcome to another issue of <em>This Week in Rust</em>!
+<a href="https://www.rust-lang.org/">Rust</a> is a programming langu...
+---
+Title: This Week in Rust 617
+Link: https://this-week-in-rust.org/blog/2025/09/17/this-week-in-rust-617/
+Summary: <p>Hello and welcome to another issue of <em>This Week in Rust</em>!
+<a href="https://www.rust-lang.org/">Rust</a> is a programming langu...
+---
+```
+
+Summaryと言いつつhtmlなのでびっくりだ。
+
+一旦Summaryは投稿内容に含めないことにする。
