@@ -1,0 +1,17 @@
+# Rust
+/target
+**/*.rs.bk
+Cargo.lock
+
+# Environment variables
+.env
+.env.local
+
+# Application data
+posted_articles.json
+
+# IDE
+.vscode/
+
+# OS
+.DS_Store
