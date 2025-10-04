@@ -71,6 +71,18 @@ Summary: <p>Hello and welcome to another issue of <em>This Week in Rust</em>!
 ---
 ```
 
-Summaryと言いつつhtmlなのでびっくりだ。
+<s>Summaryと言いつつhtmlなのでびっくりだ。
 
-一旦Summaryは投稿内容に含めないことにする。
+一旦Summaryは投稿内容に含めないことにする。</s>
+
+ RSS自体Rich Site Summaryの略なので、Summaryが本体だったっぽい。エアプでした。
+
+ここでRSSに[blueskyへのリンク](https://bsky.app/profile/thisweekinrust.bsky.social)が内容に含まれていることに気づく。
+
+ユーザー目線だとSNSで事足りるよね現代はね。
+
+一旦moduleに切り分ける
+
+### 16:15- Summaryを短縮
+
+htmlタグを除去して140字程度に切り詰める。

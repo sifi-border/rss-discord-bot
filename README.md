@@ -6,7 +6,6 @@ RSS feed を自動収集し、Discordチャンネルに投稿するBot。
 
 - 📰 **自動投稿**: RSS feedを定期的にチェックし、新着記事をDiscordに自動投稿
 - 🎨 **リッチ表示**: Discord Embed形式で見やすく表示
-- 📝 **要約付き**: 記事の概要（100-140字）を自動生成
 - 🎨 **カラー分類**: ソース別に色分けして識別しやすく
 - 🔄 **重複防止**: 既に投稿した記事は再投稿しない
 - ⏰ **定期実行**: GitHub Actionsで自動実行（設定可能）
@@ -14,7 +13,7 @@ RSS feed を自動収集し、Discordチャンネルに投稿するBot。
 ## Features (MVP)
 
 - [x] RSS feed取得・解析（This Week in Rust）
-- [x] 記事要約生成（100-140字、HTML除去）
+- [x] 記事Summary生成（100-140字、HTML除去）
 - [x] Discord Webhookへの投稿（Embed形式）
 - [ ] 投稿済み記事の重複チェック
 - [ ] 定期実行（GitHub Actions）
