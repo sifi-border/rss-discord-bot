@@ -16,4 +16,29 @@ git ignore 編集
 
 Discordで Webhook URL取得し、.envに保存
 
-git commit -m "Initial commit: Project setup with README and dependencies"
+`git commit -m "Initial commit: Project setup with README and dependencies"`
+
+リモートリポジトリを作成
+
+### 15:00- Discord へのPOST
+
+main.rsを編集
+
+```rust
+    let client = Client::new();
+    let payload = serde_json::json!({
+        "content": "🦀 Hello from Rust!",
+    });
+
+    let response = client
+        .post(&discord_webhook_url)
+        .json(&payload)
+        .send()
+        .await?;
+
+    println!("Response: {:?}", response);
+```
+
+204が返ってきて、discordのチャンネルに投稿されていた。
+
+わざわざbotを作らなくても、投稿だけならこんなにシンプルなのんな〜
