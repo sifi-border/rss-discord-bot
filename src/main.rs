@@ -1,9 +1,13 @@
-use std::env;
-
-use anyhow::Result;
-
 mod discord;
 mod rss;
+
+use anyhow::Result;
+use std::env;
+
+use crate::{
+    discord::post_to_discord,
+    rss::{strip_html_tags, truncate_summary},
+};
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -29,10 +33,15 @@ async fn main() -> Result<()> {
             "Link: {}",
             entry.links.first().map_or("No link", |l| &l.href)
         );
+        let summary = entry.summary.as_ref().map_or("No summary", |s| &s.content);
+        println!(
+            "Summary: {}",
+            truncate_summary(&strip_html_tags(summary), 140)
+        );
         println!("---");
     }
 
-    discord::post_to_discord(&discord_webhook_url, "🦀 Hello from Rust!").await?;
+    post_to_discord(&discord_webhook_url, "🦀 Hello from Rust!").await?;
 
     Ok(())
 }

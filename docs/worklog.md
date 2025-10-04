@@ -86,3 +86,15 @@ Summary: <p>Hello and welcome to another issue of <em>This Week in Rust</em>!
 ### 16:15- Summaryを短縮
 
 htmlタグを除去して140字程度に切り詰める。
+
+```
+Feed Title: This Week in Rust
+Number of Entries: 4
+Title: This Week in Rust 619
+Link: https://this-week-in-rust.org/blog/2025/10/01/this-week-in-rust-619/
+Summary: Hello and welcome to another issue of This Week in Rust!
+Rust is a programming language empowering everyone to build reliable and efficient ...
+---
+```
+
+情報量が増えておらず、涙。
