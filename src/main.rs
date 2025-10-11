@@ -2,21 +2,22 @@ mod discord;
 mod rss;
 
 use anyhow::Result;
+use dotenvy::dotenv;
 use std::env;
 
 use crate::{
     discord::post_to_discord,
-    rss::{strip_html_tags, truncate_summary},
+    rss::{fetch_rss_feed, strip_html_tags, truncate_summary},
 };
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    dotenvy::dotenv().ok();
+    dotenv().ok();
     let discord_webhook_url =
         env::var("DISCORD_WEBHOOK_URL").expect("DISCORD_WEBHOOK_URL must be set in .env file");
 
     let rss_feed_url = "https://this-week-in-rust.org/rss.xml";
-    let feed = rss::fetch_rss_feed(rss_feed_url).await?;
+    let feed = fetch_rss_feed(rss_feed_url).await?;
 
     println!(
         "Feed Title: {}",
