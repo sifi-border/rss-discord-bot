@@ -7,7 +7,7 @@ RSS feed を自動収集し、Discordチャンネルに投稿するBot。
 - 📰 **自動投稿**: RSS feedを定期的にチェックし、新着記事をDiscordに自動投稿
 - 🎨 **リッチ表示**: Discord Embed形式で見やすく表示
 - 🎨 **カラー分類**: ソース別に色分けして識別しやすく
-- 🔄 **重複防止**: 既に投稿した記事は再投稿しない
+- 🔄 **重複防止**: 既に投稿した記事は再投稿しない(jsonで管理)
 - ⏰ **定期実行**: GitHub Actionsで自動実行（設定可能）
 
 ## Features (MVP)
@@ -55,8 +55,6 @@ DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/..."
 name = "This Week in Rust"
 url = "https://this-week-in-rust.org/rss.xml"
 category = "Rust"
-color = 16737077
-emoji = "🦀"
 schedule = "Mon 09:00"
 ```
 
@@ -78,7 +76,7 @@ cargo run
 
 ### Discord Embed表示例
 
-TODO: 画像添付
+![Discord Embed Example](docs/images/preview.png)
 
 ## Architecture
 
@@ -87,7 +85,7 @@ TODO: 画像添付
     ↓ (fetch)
 [RSS Parser]
     ↓ (parse)
-[Article Filter] ← [Posted Articles DB]
+[Article Filter] ← [Posted Articles (JSON/DB)]
     ↓ (new articles only)
 [Discord Poster]
     ↓ (webhook)
