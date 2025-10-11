@@ -98,3 +98,25 @@ Rust is a programming language empowering everyone to build reliable and efficie
 ```
 
 情報量が増えておらず、涙。
+
+## 2025/10/11 Sat
+
+### 22:00-
+
+EmbedPostを定義。
+
+discord.rsに置いてるが、将来的にリファクタして移したさはある。
+
+適当にEmbedPost用の構造体を書きPOSTした。400 Bad Requestが返ってきた。
+
+これはカラーコードを写経したら桁が多くなっていた。この点を修正するときちんとEmbedでpostされていた。
+
+### 23:00-
+
+カラーコード用のEnumを定義。良い感じに渡せるようになった。
+
+```rust
+DiscordEmbedPost::new(title, url, summary, SourceCategory::Rust, Utc::now());
+```
+
+ところでtimestampいる？Discordだとポスト自体の投稿時間が表示されるのでいらない気もする。
