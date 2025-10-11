@@ -51,16 +51,16 @@ pub struct DiscordEmbedPost {
 
 impl DiscordEmbedPost {
     pub fn new(
-        title: String,
-        url: String,
-        description: String,
+        title: &str,
+        url: &str,
+        description: &str,
         category: SourceCategory,
         timestamp: DateTime<Utc>,
     ) -> Self {
         Self {
-            title: title.clone(),
-            url,
-            description,
+            title: title.to_string(),
+            url: url.to_string(),
+            description: description.to_string(),
             color: category.color(),
             timestamp,
             footer: EmbedFooter::new(category.footer_text(&title)),

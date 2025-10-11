@@ -25,19 +25,15 @@ async fn main() -> Result<()> {
         let title = entry
             .title
             .as_ref()
-            .map_or("No Title".to_string(), |t| t.content.clone());
+            .map_or("No Title", |t| t.content.as_str());
 
-        let url = entry
-            .links
-            .first()
-            .map_or(String::new(), |link| link.href.clone());
-
-        let summary = entry
+        let summary_string = entry
             .summary
             .as_ref()
             .map_or("No Summary".to_string(), |s| {
                 truncate_summary(&strip_html_tags(&s.content), 140)
             });
+        let summary = summary_string.as_str();
 
         eprintln!("Title: {}, URL: {}, Summary: {}", title, url, summary);
 
