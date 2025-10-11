@@ -1,4 +1,5 @@
 mod discord;
+mod repository;
 mod rss;
 
 use anyhow::Result;
@@ -7,6 +8,7 @@ use dotenvy::dotenv;
 use std::env;
 
 use crate::discord::post_embed;
+use crate::repository::{ArticleRepository, JsonArticleRepository};
 use crate::{
     discord::{DiscordEmbedPost, SourceCategory},
     rss::{fetch_rss_feed, strip_html_tags, truncate_summary},
@@ -18,10 +20,19 @@ async fn main() -> Result<()> {
     let discord_webhook_url =
         env::var("DISCORD_WEBHOOK_URL").expect("DISCORD_WEBHOOK_URL must be set in .env file");
 
+    let mut repo = JsonArticleRepository::new("posted_articles.json")?;
+
     let rss_feed_url = "https://this-week-in-rust.org/rss.xml";
     let feed = fetch_rss_feed(rss_feed_url).await?;
 
     if let Some(entry) = feed.entries.first() {
+        let url = entry.links.first().map_or("", |link| link.href.as_str());
+
+        if !repo.is_new_article(rss_feed_url, &url) {
+            println!("article already posted");
+            return Ok(());
+        }
+
         let title = entry
             .title
             .as_ref()
@@ -39,7 +50,16 @@ async fn main() -> Result<()> {
 
         let embed = DiscordEmbedPost::new(title, url, summary, SourceCategory::Rust, Utc::now());
 
-        post_embed(&discord_webhook_url, embed).await?;
+        match post_embed(&discord_webhook_url, embed).await {
+            Ok(_) => {
+                println!("Posted: {}", title);
+                repo.update_latest(&rss_feed_url, title, url)?;
+                repo.save()?;
+            }
+            Err(e) => {
+                eprintln!("Failed to post embed: {}", e);
+            }
+        }
     }
 
     Ok(())

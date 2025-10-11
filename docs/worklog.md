@@ -107,9 +107,11 @@ EmbedPostを定義。
 
 discord.rsに置いてるが、将来的にリファクタして移したさはある。
 
-適当にEmbedPost用の構造体を書きPOSTした。400 Bad Requestが返ってきた。
+適当にEmbedPost用の構造体を書きPOSTした。→400 Bad Requestが返ってきた。
 
-これはカラーコードを写経したら桁が多くなっていた。この点を修正するときちんとEmbedでpostされていた。
+これはカラーコードを写経したら桁が多くなっていたのが原因。
+
+この点を修正するときちんとEmbedでpostされていた。
 
 ### 23:00-
 
@@ -120,3 +122,29 @@ DiscordEmbedPost::new(title, url, summary, SourceCategory::Rust, Utc::now());
 ```
 
 ところでtimestampいる？Discordだとポスト自体の投稿時間が表示されるのでいらない気もする。
+
+### 23:30-
+
+重複判定は一旦ファイルに書き出す形にする。
+
+以下のようなjsonでfeed毎に管理。
+
+```json
+{
+  "feeds": {
+    "https://this-week-in-rust.org/rss.xml": {
+      "latest_title": "This Week in Rust 620",
+      "latest_article_url": "https://...",
+      "last_updated": "2025-10-11T14:00:00Z"
+    }
+  }
+}
+```
+
+また、post成功時のみ書き出すようにする。
+
+将来DBを導入するかもなのでRepository Patternで実装する。
+
+mainでfeed.entryの情報をこねくり回している（どこかに移したい）が、&strで扱うようrefactorした。
+
+実行するとjsonが吐き出され、postも確認。

@@ -6,7 +6,6 @@ RSS feed を自動収集し、Discordチャンネルに投稿するBot。
 
 - 📰 **自動投稿**: RSS feedを定期的にチェックし、新着記事をDiscordに自動投稿
 - 🎨 **リッチ表示**: Discord Embed形式で見やすく表示
-- 🎨 **カラー分類**: ソース別に色分けして識別しやすく
 - 🔄 **重複防止**: 既に投稿した記事は再投稿しない(jsonで管理)
 - ⏰ **定期実行**: GitHub Actionsで自動実行（設定可能）
 
@@ -15,7 +14,7 @@ RSS feed を自動収集し、Discordチャンネルに投稿するBot。
 - [x] RSS feed取得・解析（This Week in Rust）
 - [x] 記事Summary生成（100-140字、HTML除去）
 - [x] Discord Webhookへの投稿（Embed形式）
-- [ ] 投稿済み記事の重複チェック
+- [x] 投稿済み記事の重複チェック
 - [ ] 定期実行（GitHub Actions）
 
 ## Tech Stack
