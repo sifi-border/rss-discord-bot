@@ -169,3 +169,13 @@ github actionsで諸々できるようにyamlを書く
 ### 20:30-
 
 原型はclaudeに作ってもらい、古いActionを用いている部分を修正。
+
+初めはposted_article.jsonを artifactで保存する方針だったが、artifactは同じworkflowでしか共有できないらしい（え？）。
+
+なのでcacheに保存するように修正した。
+
+すると良い感じに動いたのでよかった。
+
+### 22:00-
+
+READMEを編集。バッジを追加するとそれっぽくなった。
