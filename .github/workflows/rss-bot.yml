@@ -36,4 +36,4 @@ jobs:
         with:
           name: posted-articles
           path: posted_articles.json
-          retention-days: 400 # 約13ヶ月保持
+          retention-days: 90
