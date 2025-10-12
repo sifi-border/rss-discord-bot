@@ -147,4 +147,25 @@ DiscordEmbedPost::new(title, url, summary, SourceCategory::Rust, Utc::now());
 
 mainでfeed.entryの情報をこねくり回している（どこかに移したい）が、&strで扱うようrefactorした。
 
-実行するとjsonが吐き出され、postも確認。
+正常系の動作確認done(jsonの出力とDiscordへのpostを確認)。
+
+再度runしたところ、期待通り重複を確認し何もpostしなかった。
+
+## 2025/10/12 Sun
+
+### 19:15-
+
+github actionsで諸々できるようにyamlを書く
+
+とりあえず[ドキュメント](https://docs.github.com/ja/actions)に目を通す。
+
+> リポジトリで、pull request のオープンや issue の作成などの イベント が発生したときにトリガーされるように GitHub Actions ワークフロー を構成できます。
+ワークフローには、1 つ以上の ジョブ が含まれており、ジョブは順次にまたは並列で実行できます。
+各ジョブは、専用の仮想マシン ランナー 内、またはコンテナー内で実行され、定義した スクリプト を実行するか、
+または アクション (ワークフローを簡略化できる再利用可能な拡張機能) を実行する 1 つ以上のステップで構成されます。
+
+ということらしい。
+
+### 20:30-
+
+原型はclaudeに作ってもらい、古いActionを用いている部分を修正。

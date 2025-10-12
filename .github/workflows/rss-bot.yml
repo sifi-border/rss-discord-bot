@@ -1,0 +1,26 @@
+name: RSS Discord Bot
+
+on:
+  schedule:
+    # 毎週月曜 0:27 UTC (= 9:27 JST)
+    - cron: "27 0 * * 1"
+  workflow_dispatch: # 手動実行も可能
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache dependencies
+        uses: Swatinem/rust-cache@v2
+
+      - name: Run RSS Bot
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: cargo run --release
