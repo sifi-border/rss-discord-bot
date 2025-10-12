@@ -2,8 +2,8 @@ name: RSS Discord Bot
 
 on:
   schedule:
-    # 毎週月曜 0:27 UTC (= 9:27 JST)
-    - cron: "27 0 * * 1"
+    # 毎日 0:27 UTC (= 9:27 JST)
+    - cron: "27 0 * * *"
   workflow_dispatch: # 手動実行も可能
 
 jobs:
