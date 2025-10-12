@@ -63,7 +63,7 @@ impl DiscordEmbedPost {
             description: description.to_string(),
             color: category.color(),
             timestamp,
-            footer: EmbedFooter::new(category.footer_text(&title)),
+            footer: EmbedFooter::new(category.footer_text(title)),
         }
     }
 }

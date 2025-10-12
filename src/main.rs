@@ -28,7 +28,7 @@ async fn main() -> Result<()> {
     if let Some(entry) = feed.entries.first() {
         let url = entry.links.first().map_or("", |link| link.href.as_str());
 
-        if !repo.is_new_article(rss_feed_url, &url) {
+        if !repo.is_new_article(rss_feed_url, url) {
             println!("article already posted");
             return Ok(());
         }
@@ -53,7 +53,7 @@ async fn main() -> Result<()> {
         match post_embed(&discord_webhook_url, embed).await {
             Ok(_) => {
                 println!("Posted: {}", title);
-                repo.update_latest(&rss_feed_url, title, url)?;
+                repo.update_latest(rss_feed_url, title, url)?;
                 repo.save()?;
             }
             Err(e) => {
