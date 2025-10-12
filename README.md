@@ -1,6 +1,11 @@
-# 🤖 RSS Discord Bot
+# RSS Discord Bot
 
-RSS feed を自動収集し、Discordチャンネルに投稿するBot。
+![Rust](https://img.shields.io/badge/rust-1.90+-orange?logo=rust)
+[![CI](https://github.com/sifi-border/rss-discord-bot/actions/workflows/ci.yml/badge.svg)](https://github.com/sifi-border/rss-discord-bot/actions/workflows/ci.yml)
+
+🤖 定期的に RSS feed を収集し、Discordチャンネルに投稿するBot
+
+![Discord Embed Example](docs/images/preview.png)
 
 ## Features
 
@@ -15,22 +20,21 @@ RSS feed を自動収集し、Discordチャンネルに投稿するBot。
 - [x] 記事Summary生成（100-140字、HTML除去）
 - [x] Discord Webhookへの投稿（Embed形式）
 - [x] 投稿済み記事の重複チェック
-- [ ] 定期実行（GitHub Actions）
+- [x] 定期実行（GitHub Actions）
 
 ## Tech Stack
 
-- **言語**: Rust
-- **非同期ランタイム**: Tokio
+- **Langage**: Rust
+- **Async Runtime**: Tokio
 - **HTTP Client**: reqwest
-- **RSS解析**: feed-rs
-- **シリアライズ**: serde, serde_json
+- **RSS parse**: feed-rs
 - **CI/CD**: GitHub Actions
 
 ## Setup
 
-### 前提条件
+### Requirements
 
-- Rust 1.70+
+- Rust 1.90+
 - Discord Webhookの作成
 
 ### Discord Webhook設定
@@ -39,13 +43,13 @@ RSS feed を自動収集し、Discordチャンネルに投稿するBot。
 2. 「新しいWebhook」をクリック
 3. 名前とチャンネルを設定
 4. Webhook URLをコピー
-5. `.env`ファイルを作成:
+5. `.env`ファイルを作成しURLを置く
 
-```bash
+```.env
 DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/..."
 ```
 
-### 設定ファイル（将来実装予定）
+### Configration（将来実装予定）
 
 `config.toml`:
 
@@ -67,15 +71,8 @@ cargo run
 
 ### GitHub Actionsで定期実行
 
-1. GitHubリポジトリのSettings → Secrets
-2. `DISCORD_WEBHOOK_URL`を追加
-3. `.github/workflows/rss-bot.yml`を編集し、自動実行
-
-## Message Format
-
-### Discord Embed表示例
-
-![Discord Embed Example](docs/images/preview.png)
+1. GitHubリポジトリのSettings → Secretsから`DISCORD_WEBHOOK_URL`を追加
+3. `.github/workflows/rss-bot.yml`にてworkflowを実行
 
 ## Architecture
 
