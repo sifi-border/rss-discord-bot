@@ -20,7 +20,20 @@ jobs:
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
 
+      - name: Download previous state
+        uses: actions/download-artifact@v4
+        with:
+          name: posted-articles
+        continue-on-error: true # 初回は存在しないのでエラーを無視
+
       - name: Run RSS Bot
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: cargo run --release
+
+      - name: Upload current state
+        uses: actions/upload-artifact@v4
+        with:
+          name: posted-articles
+          path: posted_articles.json
+          retention-days: 400 # 約13ヶ月保持
